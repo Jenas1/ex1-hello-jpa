@@ -18,46 +18,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //조회
-            // Member findMember = em.find(Member.class, 2L);
-            //    System.out.println("findMember.getId()"+ findMember.getId());
-            // System.out.println("findMember.getId()"+ findMember.getName());
-            // JPA 잘못된것이다. 쉽게 생각하시면 데이터 베이스 커넥션을 박았다 생각해라
+            //영속
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L,"B");
 
-            //삭제 em.remove(findMember);
-
-            //수정은 기가막히다 그냥 이것만 넣어도 바뀐다 펄시트 안해도 된다. jpa 가 커밋할때 다 체크를 하는 것이다 .이게 짱편한 것이다.
-            //findMember.setName("helloJPA");
-
-
-            //List<Member> result  = em.createQuery("select m from Member as m", Member.class)
-            //.setFirstResult(5).setMaxResults(8)
-            //.getResultList();
-            //페이징 처리 ㄱㄴ
-
-            // 대상이 테이블이 아니고 쿼리가 되는것이다
-
-            //   for (Member member: result){
-            //       System.out.println("member.getName()"+ member.getName());
-            //  }
-
-
-            // 비용속 상태
-          /* Member member = new Member();
-           member.setId(101L);
-           member.setName("HelloJPA");*/
-
-            //영속 실제로 디비 저장은 안된다.
-        /* System.out.println("Before");
-            em.persist(member);
-           System.out.println("after");*/
-
-            //캐싱지원 쿼리 실행전 조회한다. , 2번째 걸 조회 하니까 1
-            Member findMember1 = em.find(Member.class, 101L);
-            Member findMember2 = em.find(Member.class, 101L);
-           
-           //동일성 보장
-            System.out.println(findMember1 == findMember2);
+            em.persist(member1);
+            em.persist(member2);
+            System.out.println("================================");
+            //선을 긋고 나간다. 버퍼링이라는 기능을 쓸 수 가 있는것이다. 최적화 여지자체가 없다. 커밋하기 직전에 인서트 하면된다.
 
 
             //디비 쿼리가 날라가는시기
