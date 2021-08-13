@@ -62,7 +62,12 @@ public class JpaMain {
 
 
 
+           //영속
+            Member member=   em.find(Member.class, 150L);
+            member.setName("zzzzzzz");
 
+            System.out.println("================================");
+            //선을 긋고 나간다. 버퍼링이라는 기능을 쓸 수 가 있는것이다. 최적화 여지자체가 없다. 커밋하기 직전에 인서트 하면된다.
 
 
 

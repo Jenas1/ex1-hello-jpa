@@ -21,8 +21,10 @@ public class JpaMain {
 
             //영속
             Member member = new Member(200L, "member200");
-            em.clear();
+            em.persist(member);
 
+            //트랜젝션 실행전에 강제 호출 플러시
+            em.flush();
             System.out.println("===============");
 
             //디비 쿼리가 날라가는시기

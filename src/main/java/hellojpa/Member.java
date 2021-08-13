@@ -1,5 +1,6 @@
 package hellojpa;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,7 +11,10 @@ public class Member {
 
     @Id
     private Long id;
+
+    @Column(unique = true, length = 10)
     private String name;
+
     // JPA는 기본생성자 하나가 있어야함?
     public Member() {
     }
