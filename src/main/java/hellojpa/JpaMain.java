@@ -18,13 +18,12 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Member member = new Member();
+            member.setId(2L);
+            member.setUsername("B");
+            member.setRoleType(RoleType.ADMIN);
 
-            //영속
-            Member member = new Member(200L, "member200");
-            em.clear();
-
-            System.out.println("===============");
-
+            em.persist(member);
             //디비 쿼리가 날라가는시기
             tx.commit();
         } catch (Exception e) {
