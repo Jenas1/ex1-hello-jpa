@@ -18,24 +18,30 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setId(2L);
-            member.setUsername("B");
-            member.setRoleType(RoleType.ADMIN);
+            //저장하는 코드
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
+            Member member = new Member();
+            member.setUsername("memeber2");
+            member.setTeam(team);
             em.persist(member);
-            //디비 쿼리가 날라가는시기
+
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam" + findTeam.getName());
+
+
+
+
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
         } finally {
             em.close();
         }
-        // 엔티티 메니저를 꼭 닫아주어야 한다 .. 사실은 이런 코드가 없어질 것이다 스프링이 다 관리해주어서
-
-
-        //code 코드를 항상 닫아 주어야 한다. 실제로 디비에 저장하는 트랜젝션은 ?? 디비 컬렉션을 얻어서 일관적인 엔티티 메니저를
-        // 꼭 만들어 줘야한다.
         emf.close();
 
 
