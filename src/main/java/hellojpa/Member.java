@@ -42,4 +42,6 @@ public class Member {
     public void setTeam(Team team) {
         this.team = team;
     }
+    //연관관계 편의 메소드 나자신의 세팅 양쪽으로
+    //changeTeam
 }

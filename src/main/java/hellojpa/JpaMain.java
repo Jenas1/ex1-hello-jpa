@@ -18,23 +18,18 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //저장하는 코드
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
             Member member = new Member();
-            member.setUsername("memeber2");
-            member.setTeam(team);
+            member.setUsername("");
+
             em.persist(member);
 
-            Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam" + findTeam.getName());
+            Team team = new Team();
+            team.setName("teamA");
 
+            // 연관 관계가 바뀌어서 애매할 수 있다.
+            team.getMembers().add(member);
 
-
-
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e) {
