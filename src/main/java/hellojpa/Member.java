@@ -12,12 +12,14 @@ public class Member {
     private Long id;
     @Column(name = "USERNAME")
     private String Username;
-/*    @Column(name = "TEAM_ID")
-    private Long teamId*/;
 
     @ManyToOne  // 1대 다
     @JoinColumn(name="TEAM_ID") // FK
     private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")  // 1대1 ManyTo one 유사
+    private Locker locker;
 
     public Long getId() {
         return id;
