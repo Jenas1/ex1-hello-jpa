@@ -1,25 +1,24 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Entity
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
+
     @Column(name = "USERNAME")
-    private String Username;
-
-    @ManyToOne  // 1대 다
-    @JoinColumn(name="TEAM_ID") // FK
-    private Team team;
-
-    @OneToOne
-    @JoinColumn(name = "LOCKER_ID")  // 1대1 ManyTo one 유사
-    private Locker locker;
+    private String username;
+    //기간
+    @Embedded
+    private Period WorkPeriod;
+    // 주소
+    @Embedded
+    private Address homeAddress;
 
     public Long getId() {
         return id;
@@ -30,20 +29,28 @@ public class Member {
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
+    public Period getWorkPeriod() {
+        return WorkPeriod;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setWorkPeriod(Period workPeriod) {
+        WorkPeriod = workPeriod;
     }
-    //연관관계 편의 메소드 나자신의 세팅 양쪽으로
-    //changeTeam
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+
 }
